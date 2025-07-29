@@ -1,136 +1,122 @@
-# Philosophers - Dining Philosophers Problem
+# Philosophers: Dining Philosophers Simulation
 
-## Overview
+Welcome to **Philosophers**, a modern implementation of the classic Dining Philosophers concurrency problem—ideal for anyone exploring threads, synchronization, and the fun (and peril!) of shared resources in C.
 
-This project is an implementation of the classic *Dining Philosophers* problem using concurrent programming in C with pthreads. It demonstrates advanced synchronization techniques, deadlock prevention, and resource management in a multi-threaded environment.
+## ⭐ What is This Project?
 
-The problem consists of philosophers sitting around a table, alternating between thinking and eating. Each philosopher needs two forks (shared resources) to eat but there are fewer forks than philosophers, raising challenges around concurrency, deadlock, and starvation.
+This project simulates a group of philosophers who alternate between **thinking**, **eating**, and **sleeping**—but must share a limited number of forks. It’s a playful introduction to:
 
----
+- **Thread synchronization**
+- **Mutex-based resource control**
+- **Deadlock prevention and starvation detection**
+- **Real-time concurrent monitoring**
 
-## Features
 
-- Robust prevention of **deadlocks** based on resource hierarchy ordering.
-- Fine-grained synchronization using multiple specialized mutexes:
-  - `write_mutex` for synchronized console output.
-  - `death_mutex` for safe simulation termination.
-  - `meal_mutex` for protecting shared state related to meals.
-- Accurate timing control with custom `ft_usleep()` for precise sleep durations.
-- Handling of edge cases such as simulation with a single philosopher.
-- Monitor thread implements continuous checking for philosopher deaths and simulation end conditions.
-- Defensive programming with comprehensive resource cleanup to avoid leaks.
+## 🚥 Rules of the Simulation
 
----
+- Philosophers alternate between eating, sleeping, and thinking.
+- Each needs **two forks (mutexes)** to eat.
+- If a philosopher doesn’t eat within the given `time_to_die`, they die.
+- Simulation ends if any philosopher dies or all philosophers have eaten the required number of times.
 
-## Usage
 
-### Compilation
+## 🗂️ Project Structure
+
 ```
+Philosophers/
+└── philo/
+    ├── inc/
+    │   └── philo.h
+    ├── obj/
+    ├── src/
+    │   ├── args_parser.c
+    │   ├── main.c
+    │   ├── mutex_manager.c
+    │   ├── philosophers_actions.c
+    │   ├── philosophers_threads.c
+    │   ├── simulation_init.c
+    │   ├── simulation_monitor.c
+    │   ├── simulation_utils.c
+    │   └── time_utils.c
+    ├── Makefile
+    └── philo
+```
+
+
+## 📚 Core Components
+
+| File | Purpose |
+| :-- | :-- |
+| `args_parser.c` | Command-line argument parsing and validation |
+| `main.c` | Program entry and main simulation loop |
+| `mutex_manager.c` | Fork/mutex initialization and management |
+| `philosophers_actions.c` | Implements eat, sleep and think behaviors |
+| `philosophers_threads.c` | Thread creation, execution and cleanup |
+| `simulation_init.c` | Sets up initial simulation state and resources |
+| `simulation_monitor.c` | Monitors for starved philosophers and completion |
+| `simulation_utils.c` | Helper functions supporting the simulation |
+| `time_utils.c` | Accurate timekeeping and delays |
+| `philo.h` | Structures, prototypes, global includes |
+
+## 🚀 Getting Started
+
+### Build
+
+```bash
 make
 ```
-### Running the Simulation
-```
+
+This will compile the project and produce the `philo` executable.
+
+### Run
+
+```bash
 ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]
 ```
 
-- `number_of_philosophers`: The total number of philosophers (1 to 200).
-- `time_to_die` (ms): Time in milliseconds before a philosopher dies without eating.
-- `time_to_eat` (ms): Time in milliseconds that a philosopher spends eating.
-- `time_to_sleep` (ms): Time in milliseconds that a philosopher sleeps.
-- `[number_of_times_each_philosopher_must_eat]` (optional): Number of meals each philosopher must eat before the simulation ends. If omitted, simulation runs until a philosopher dies.
+- `number_of_philosophers`: How many philosophers (and forks).
+- `time_to_die`: Time in ms until a philosopher dies if they don’t eat.
+- `time_to_eat`: Eating duration in ms.
+- `time_to_sleep`: Sleeping duration in ms.
+- `number_of_times_each_philosopher_must_eat`: (Optional) End simulation when everyone has eaten this many times.
 
-Example:
+
+#### Example
+
+```bash
+./philo 5 800 200 200 7
 ```
-./philo 5 800 200 200 5
-```
 
-Runs a simulation with 5 philosophers, where each philosopher dies if they don’t eat within 800ms, spends 200ms eating and sleeping, and simulation stops after each philosopher has eaten 5 times.
+(5 philosophers, 800ms to die, eat for 200ms, sleep for 200ms, eat 7 times each.)
 
----
+## 🧠 Key Features
 
-## Implementation Details
+- **Robust Thread Synchronization:** Each philosopher is a thread, sharing forks (mutexes) with strict race condition avoidance.
+- **Deadlock \& Starvation Prevention:** Uses smart resource ordering and checks to guarantee progress and safety.
+- **Modular \& Testable:** Well-structured codebase for readability and extensibility.
+- **Live Monitoring:** Background thread detects and reports starved philosophers instantly.
 
-### Deadlock Prevention
 
-Philosophers pick up forks in a strict global order determined by comparing the forks' memory addresses. This guarantees no circular wait, preventing deadlock effectively and deterministically.
+## 🧪 Testing \& Experiments
 
-### Synchronization
+Put your simulation through its paces with:
 
-- Uses three mutexes specialized for:
-  - Controlled and thread-safe output operations.
-  - Managing the simulation state and detecting simulation termination.
-  - Protecting access to shared meal data.
+- **Normal runs:** Typical parameters, multiple philosophers
+- **Edge cases:** Single philosopher, minimum or maximum times
+- **Stress tests:** Large groups (20+ philosophers), very low timings
 
-### Monitoring
 
-A dedicated monitor thread checks at regular intervals for two conditions:
+## 🎓 Educational Value
 
-- If any philosopher has not eaten within `time_to_die`.
-- If all philosophers have eaten the required number of meals (if specified).
+This project is perfect for those learning:
 
-The monitor gracefully signals the end of the simulation and outputs death messages consistently.
+- Classic concurrency problems
+- Practical C thread programming
+- Real-time synchronization techniques
 
-### Timing
 
-A custom sleep function `ft_usleep()` improves precision over standard `usleep()` by looping with short sleeps and checking elapsed time, balancing accuracy and CPU usage.
+## 🤝 Contributions
 
----
+Pull requests and issues are welcome! See something to improve or tweak? Open an issue or make a PR and join the conversation.
 
-## Edge Cases
-
-- **Single philosopher:** Properly handled by allowing the philosopher to pick only one fork and eventually die due to starvation.
-- **Large numbers of philosophers:** The implementation scales up to 200 philosophers with proper synchronization and resource management.
-
----
-
-## Project Structure
-
-| File               | Purpose                               |
-|--------------------|-------------------------------------|
-| `main.c`           | Program entry point and argument parsing |
-| `philo.h`          | Data structures and function prototypes |
-| `simulation_init.c` | Initialization and cleanup functions |
-| `mutex_manager.c`  | Initialization and destruction of mutexes |
-| `philosopher_thread.c` | Philosopher thread routines and lifecycle management |
-| `philosopher_actions.c` | Actions: take forks, eat, sleep, think |
-| `simulation_monitor.c` | Monitor thread implementation |
-| `time_utils.c`     | Time and sleep utility functions |
-| `simulation_utils.c` | Helper functions such as printing and simulation state checks |
-
----
-
-## Requirements
-
-- POSIX-compliant system (Linux, macOS)
-- C compiler (gcc recommended)
-- pthreads library (usually included in standard C libraries)
-
----
-
-## How to Contribute
-
-Feel free to fork the repository and submit pull requests to improve functionality, add features, or fix bugs. Please follow standard coding conventions and provide clear commit messages.
-
----
-
-## License
-
-This project is open-source and available under the MIT License.
-
----
-
-## References
-
-- Dijkstra, E.W., “The Dining Philosophers Problem,” 1965.
-- POSIX Threads Programming [https://man7.org/linux/man-pages/man7/pthreads.7.html](https://man7.org/linux/man-pages/man7/pthreads.7.html)
-- Various academic papers on concurrency and deadlock prevention.
-
----
-
-## Contact
-
-For any questions or suggestions, please open an issue or contact me via GitHub.
-
----
-
-*Crafted with care to demonstrate the fundamentals and complexities of concurrent programming.*
+*Happy coding and may all your philosophers dine in peace!*
