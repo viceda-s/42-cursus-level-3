@@ -1,8 +1,6 @@
-# Milestone 3 – In Progress
+# Milestone 3 – In Progress ⏳
 
 Welcome to my repository documenting **Milestone 3** at 42 School. This repository tracks my ongoing progress on both core projects—**Philosophers** and **Minishell**—including technical highlights, structures, and implementation insights.
-
-> **Status:** _Work in Progress_ 🚧
 
 ## 🏅 My Scores
 
