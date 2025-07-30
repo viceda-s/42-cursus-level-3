@@ -6,7 +6,7 @@
 /*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 05:33:55 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/07/27 16:49:58 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:11:50 by viceda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,12 @@
 # include <sys/time.h>
 # include <string.h>
 
-// Cores ANSI para diferentes ações
 # define COLOR_RESET	"\033[0m"
-# define COLOR_FORK		"\033[33m"		// Amarelo para pegar garfo
-# define COLOR_EAT		"\033[32m"		// Verde para comer
-# define COLOR_SLEEP	"\033[36m"		// Ciano para dormir
-# define COLOR_THINK	"\033[35m"		// Magenta para pensar
-# define COLOR_DIED		"\033[31m"		// Vermelho para morte
+# define COLOR_FORK		"\033[33m"
+# define COLOR_EAT		"\033[32m"
+# define COLOR_SLEEP	"\033[36m"
+# define COLOR_THINK	"\033[35m"
+# define COLOR_DIED		"\033[31m"
 
 typedef struct s_data
 {
@@ -74,16 +73,16 @@ int		init_table(t_table *table);
 int		init_philosophers(t_table *table);
 void	start_simulation(t_table *table);
 void	cleanup_table(t_table *table);
-void	handle_single_philosopher(t_philo *philo);
 
 /* mutex_manager.c */
 int		init_mutexes(t_table *table);
 int		init_data_mutexes(t_table *table);
 int		init_fork_mutexes(t_table *table);
+void	destroy_data_mutexes(t_table *table);
+void	destroy_all_mutexes(t_table *table);
 
 /* philosopher_thread.c */
 void	*philosopher_routine(void *arg);
-int		should_philosopher_stop(t_philo *philo);
 
 /* philosopher_actions.c */
 void	take_forks(t_philo *philo);
@@ -104,9 +103,6 @@ void	ft_usleep(long milliseconds);
 
 /* simulation_utils.c */
 void	print_action(t_philo *philo, char *action);
-void	print_action_colored(t_philo *philo, char *action, char *color);
-char	*get_action_color(char *action);
 int		simulation_ended(t_philo *philo);
-int		simulation_ended_unsafe(t_data *data);
 
 #endif

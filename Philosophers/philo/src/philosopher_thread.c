@@ -6,11 +6,22 @@
 /*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:00:00 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/07/27 16:09:32 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:02:57 by viceda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+static int	should_stop_eating(t_philo *philo)
+{
+	int	should_stop;
+
+	pthread_mutex_lock(&philo->data->meal_mutex);
+	should_stop = (philo->data->nb_times_to_eat != -1
+			&& philo->meals_eaten >= philo->data->nb_times_to_eat);
+	pthread_mutex_unlock(&philo->data->meal_mutex);
+	return (should_stop);
+}
 
 void	*philosopher_routine(void *arg)
 {
@@ -19,7 +30,8 @@ void	*philosopher_routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->data->nb_philo == 1)
 	{
-		handle_single_philosopher(philo);
+		print_action(philo, "has taken a fork");
+		ft_usleep(philo->data->time_to_die);
 		return (NULL);
 	}
 	if (philo->id % 2 == 0)
@@ -29,22 +41,9 @@ void	*philosopher_routine(void *arg)
 		take_forks(philo);
 		eat(philo);
 		drop_forks(philo);
-		if (should_philosopher_stop(philo))
+		if (should_stop_eating(philo))
 			break ;
 		sleep_and_think(philo);
 	}
 	return (NULL);
-}
-
-int	should_philosopher_stop(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->data->meal_mutex);
-	if (philo->data->nb_times_to_eat != -1
-		&& philo->meals_eaten >= philo->data->nb_times_to_eat)
-	{
-		pthread_mutex_unlock(&philo->data->meal_mutex);
-		return (1);
-	}
-	pthread_mutex_unlock(&philo->data->meal_mutex);
-	return (0);
 }

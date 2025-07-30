@@ -6,11 +6,19 @@
 /*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:00:00 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/07/27 16:25:43 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:59:37 by viceda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/philo.h"
+
+static void	cleanup_partial(t_table *table, int stage)
+{
+	if (stage >= 1 && table->philos)
+		free(table->philos);
+	if (stage >= 2 && table->forks)
+		free(table->forks);
+}
 
 int	init_table(t_table *table)
 {
@@ -24,13 +32,12 @@ int	init_table(t_table *table)
 	if (!table->forks)
 	{
 		printf("Error: Failed to allocate memory for forks\n");
-		free(table->philos);
+		cleanup_partial(table, 1);
 		return (-1);
 	}
 	if (init_mutexes(table) == -1)
 	{
-		free(table->philos);
-		free(table->forks);
+		cleanup_partial(table, 2);
 		return (-1);
 	}
 	if (init_philosophers(table) == -1)
@@ -83,8 +90,6 @@ void	start_simulation(t_table *table)
 
 void	cleanup_table(t_table *table)
 {
-	int	i;
-
 	if (table->philos)
 	{
 		free(table->philos);
@@ -92,19 +97,8 @@ void	cleanup_table(t_table *table)
 	}
 	if (table->forks)
 	{
-		i = 0;
-		while (i < table->data.nb_philo)
-			pthread_mutex_destroy(&table->forks[i++]);
 		free(table->forks);
 		table->forks = NULL;
 	}
-	pthread_mutex_destroy(&table->data.write_mutex);
-	pthread_mutex_destroy(&table->data.death_mutex);
-	pthread_mutex_destroy(&table->data.meal_mutex);
-}
-
-void	handle_single_philosopher(t_philo *philo)
-{
-	print_action(philo, "has taken a fork");
-	ft_usleep(philo->data->time_to_die);
+	destroy_all_mutexes(table);
 }

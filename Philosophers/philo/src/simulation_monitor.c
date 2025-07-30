@@ -6,7 +6,7 @@
 /*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:00:00 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/07/27 16:52:05 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:08:06 by viceda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*monitor_routine(void *arg)
 	t_table	*table;
 
 	table = (t_table *)arg;
-	while (!simulation_ended_unsafe(&table->data))
+	while (!table->data.simulation_end)
 	{
 		if (check_death(table) == 1)
 			break ;
@@ -44,7 +44,7 @@ int	check_death(t_table *table)
 		pthread_mutex_lock(&table->data.meal_mutex);
 		last_meal = table->philos[i].last_meal_time;
 		pthread_mutex_unlock(&table->data.meal_mutex);
-		if (simulation_ended_unsafe(&table->data))
+		if (table->data.simulation_end)
 			return (0);
 		if ((current_time - last_meal) >= table->data.time_to_die)
 			return (handle_death_detected(table, i, current_time));

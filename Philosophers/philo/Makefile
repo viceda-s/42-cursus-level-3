@@ -6,7 +6,7 @@
 #    By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/27 12:00:00 by viceda-s          #+#    #+#              #
-#    Updated: 2025/07/27 16:46:19 by viceda-s         ###   ########.fr        #
+#    Updated: 2025/07/29 16:13:30 by viceda-s         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,9 @@ SRC_DIR		= src
 OBJ_DIR		= obj
 INC_DIR		= inc
 
-SOURCES		= main.c args_parser.c simulation_init.c mutex_manager.c \
-			  philosopher_thread.c philosopher_actions.c simulation_monitor.c \
-			  time_utils.c simulation_utils.c
+SOURCES		= args_parser.c main.c mutex_manager.c philosopher_thread.c\
+			  philosopher_actions.c simulation_init.c  simulation_monitor.c \
+			  utils.c
 
 OBJS		= $(addprefix $(OBJ_DIR)/, $(SOURCES:.c=.o))
 
@@ -34,7 +34,7 @@ NC			= \033[0m
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@echo "$(YELLOW)Linking $(NAME)...$(NC)"
+	@echo "$(YELLOW)Compiling $(NAME)...$(NC)"
 	@$(CC) $(OBJS) $(LDFLAGS) -o $(NAME)
 	@echo "$(GREEN)$(NAME) compiled successfully!$(NC)"
 

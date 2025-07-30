@@ -6,7 +6,7 @@
 /*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:00:00 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/07/27 16:08:50 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:43:30 by viceda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
-	{
-		result = result * 10 + (str[i] - '0');
-		i++;
-	}
+		result = result * 10 + (str[i++] - '0');
 	return (result * sign);
 }
 

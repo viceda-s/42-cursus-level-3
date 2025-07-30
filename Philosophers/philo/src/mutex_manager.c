@@ -6,7 +6,7 @@
 /*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/27 17:00:00 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/07/27 16:09:18 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:59:37 by viceda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,30 @@ int	init_fork_mutexes(t_table *table)
 		{
 			while (--i >= 0)
 				pthread_mutex_destroy(&table->forks[i]);
-			pthread_mutex_destroy(&table->data.write_mutex);
-			pthread_mutex_destroy(&table->data.death_mutex);
-			pthread_mutex_destroy(&table->data.meal_mutex);
+			destroy_data_mutexes(table);
 			return (-1);
 		}
 		i++;
 	}
 	return (0);
+}
+
+void	destroy_data_mutexes(t_table *table)
+{
+	pthread_mutex_destroy(&table->data.write_mutex);
+	pthread_mutex_destroy(&table->data.death_mutex);
+	pthread_mutex_destroy(&table->data.meal_mutex);
+}
+
+void	destroy_all_mutexes(t_table *table)
+{
+	int	i;
+
+	if (table->forks)
+	{
+		i = 0;
+		while (i < table->data.nb_philo)
+			pthread_mutex_destroy(&table->forks[i++]);
+	}
+	destroy_data_mutexes(table);
 }
