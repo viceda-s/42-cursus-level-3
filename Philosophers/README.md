@@ -1,5 +1,7 @@
 # Philosophers: Dining Philosophers Simulation
 
+![Score Badge](https://img.shields.io/badge/Score-100%2F100-brightgreen)
+
 Welcome to **Philosophers**, a modern implementation of the classic Dining Philosophers concurrency problem—ideal for anyone exploring threads, synchronization, and the fun (and peril!) of shared resources in C.
 
 ## ⭐ What is This Project?
