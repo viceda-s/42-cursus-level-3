@@ -4,14 +4,16 @@ Welcome to my repository documenting **Milestone 3** at 42 School. This reposito
 
 > **Status:** _Work in Progress_ 🚧
 
-## 🔎 Project Overview
+## 🏅 My Scores
 
 | Project | Status | Focus \& Technical Highlights |
 | :-- | :--: | :-- |
-| Philosophers | ⏳ In Progress | Concurrent programming, thread/mutex synchronization |
+| Philosophers | ✅ 100/100 | Concurrent programming, thread/mutex synchronization |
 | Minishell | ⏳ In Progress | Shell parsing, process management, Unix signals |
 
-### 🍝 Philosophers
+## 🔎 Project Details
+
+### 🍝 Philosophers – 100/100 ✅
 
 - **Objective:**
 Implement and simulate the classic Dining Philosophers problem to explore concurrency, synchronization, and deadlock avoidance.
@@ -23,7 +25,7 @@ Implement and simulate the classic Dining Philosophers problem to explore concur
 - **Anticipated Skills:** Concurrency, multithreading, resource locking, timing coordination, edge-case testing.
 
 
-### 🐚 Minishell
+### 🐚 Minishell - ⏳ In Progress
 
 - **Objective:**
 Recreate a simple Unix shell capable of interpreting and executing user commands.
@@ -52,9 +54,9 @@ Projects are split into dedicated subdirectories, each with their code and relev
 | Milestone Item | Status |
 | :-- | :--: |
 | Repository structure | ✅ Complete |
-| Philosophers code | ⏳ WIP |
-| Philosophers evaluation | ⏳ WIP |
-| Minishell docs | ⏳ WIP |
+| Philosophers code | ✅ Complete |
+| Philosophers evaluation | ✅ Complete |
+| Minishell code | ⏳ WIP |
 | Minishell evaluation | ⏳ WIP |
 
 ## 🏆 Personal Highlights
@@ -77,5 +79,3 @@ git clone https://github.com/viceda-s/42-cursus-level-3.git
 _This README will be updated regularly with progress, implementation notes, and final results._
 
 **For feedback, issues, or collaboration, open an issue or contact me directly!**
-
-<div style="text-align: center">⁂</div>
