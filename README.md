@@ -15,12 +15,12 @@ Welcome to my repository documenting **Milestone 3** at 42 School. This reposito
 
 - **Objective:**
 Implement and simulate the classic Dining Philosophers problem to explore concurrency, synchronization, and deadlock avoidance.
-- **Key Features (planned):**
+- **Key Features:**
     - Efficient thread handling with **POSIX threads**.
     - Mutexes for fork management to prevent data races.
     - Deadlock detection strategies and starvation prevention.
     - Responsive logging and timing to track philosopher actions.
-- **Anticipated Skills:** Concurrency, multithreading, resource locking, timing coordination, edge-case testing.
+- **Skills gained:** Concurrency, multithreading, resource locking, timing coordination, edge-case testing.
 
 
 ### 🐚 Minishell - ⏳ In Progress
