@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_helpers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
+/*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:06:05 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/08/28 18:20:20 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/08/29 17:17:51 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,21 @@ t_ast	*parse_redirection(t_token **tokens, t_shell *shell)
 	return (node);
 }
 
+t_ast	*add_redir_to_chain(t_ast *redir, t_ast *redir_list, t_ast *cmd)
+{
+	if (!redir_list)
+	{
+		redir_list = redir;
+		redir->left = cmd;
+	}
+	else
+	{
+		redir->left = redir_list;
+		redir_list = redir;
+	}
+	return (redir_list);
+}
+
 t_ast	*handle_command_first(t_token **tokens, t_shell *shell)
 {
 	t_ast	*cmd;
@@ -83,17 +98,10 @@ t_ast	*handle_command_first(t_token **tokens, t_shell *shell)
 			redir = parse_redirection(tokens, shell);
 			if (!redir)
 				break ;
-			if (!redir_list)
-			{
-				redir_list = redir;
-				redir->left = cmd;
-			}
-			else
-			{
-				redir->left = redir_list;
-				redir_list = redir;
-			}
+			redir_list = add_redir_to_chain(redir, redir_list, cmd);
 		}
 	}
-	return (redir_list ? redir_list : cmd);
+	if (redir_list)
+		return (redir_list);
+	return (cmd);
 }

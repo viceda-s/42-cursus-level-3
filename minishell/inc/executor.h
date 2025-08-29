@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
+/*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:19:01 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/08/28 14:48:22 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/08/29 17:17:26 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,9 @@ int		handle_heredoc(char *delimiter);
 /* executor/process_manager.c */
 pid_t	create_process(void);
 int		wait_for_processes(pid_t *pids, int count);
+
+/* executor/command_exec.c */
+int		handle_path_error(char **expanded_args, char *cmd_name);
+int		handle_exec_error(char **expanded_args, char *cmd_name);
 
 #endif

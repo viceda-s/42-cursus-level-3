@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+         #
+#    By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/03 10:52:25 by viceda-s          #+#    #+#              #
-#    Updated: 2025/08/29 13:41:43 by viceda-s         ###   ########.fr        #
+#    Updated: 2025/08/29 17:20:17 by bpiovano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRCFILES    = main.c \
               expander/exit_code.c \
               executor/executor.c \
               executor/command_exec.c \
+              executor/handle_error.c \
               executor/path_resolver.c \
               executor/arg_expansion.c \
               executor/pipe_handler.c \
