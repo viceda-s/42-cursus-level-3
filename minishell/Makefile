@@ -6,7 +6,7 @@
 #    By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/03 10:52:25 by viceda-s          #+#    #+#              #
-#    Updated: 2025/08/29 21:11:21 by bpiovano         ###   ########.fr        #
+#    Updated: 2025/08/29 21:15:28 by bpiovano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -219,7 +219,7 @@ $(OBJDIR):
 # Libft compilation
 $(LIBFT):
 	@echo "$(YELLOW)Compiling libft...$(NC)"
-	@make -C $(LIBFTDIR)
+	@make -C $(LIBFTDIR) --no-print-directory > /dev/null
 	@echo "$(GREEN)✓ libft compiled!$(NC)"
 
 # Cleanup
