@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
+/*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 14:37:00 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/08/28 18:20:20 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/08/29 16:49:56 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,41 +24,6 @@ static int	execute_builtin_command(t_ast *cmd, t_shell *shell)
 	result = execute_builtin(expanded_args, shell);
 	free_args(expanded_args);
 	return (result);
-}
-
-static int	handle_exec_error(char **expanded_args, char *cmd_name)
-{
-	struct stat	st;
-
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(cmd_name, STDERR_FILENO);
-	if (ft_strchr(cmd_name, '/'))
-	{
-		if (access(cmd_name, F_OK) == 0)
-		{
-			if (stat(cmd_name, &st) == 0 && S_ISDIR(st.st_mode))
-			{
-				ft_putendl_fd(": Is a directory", STDERR_FILENO);
-				free_args(expanded_args);
-				return (126);
-			}
-			else if (access(cmd_name, X_OK) != 0)
-			{
-				ft_putendl_fd(": Permission denied", STDERR_FILENO);
-				free_args(expanded_args);
-				return (126);
-			}
-		}
-		else
-		{
-			ft_putendl_fd(": No such file or directory", STDERR_FILENO);
-			free_args(expanded_args);
-			return (127);
-		}
-	}
-	ft_putendl_fd(": command not found", STDERR_FILENO);
-	free_args(expanded_args);
-	return (127);
 }
 
 static int	fork_and_execute(char *executable, char **expanded_args,

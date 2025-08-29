@@ -79,7 +79,6 @@ static int	handle_command_flag(int argc, char **argv, t_shell *shell)
 		cleanup_and_exit(shell, exit_status);
 		return (exit_status);
 	}
-
 	return (-1);
 }
 

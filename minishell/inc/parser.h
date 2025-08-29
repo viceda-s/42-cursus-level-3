@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
+/*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:18:48 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/08/28 10:26:10 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/08/29 17:18:21 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		get_arg_count(char **args);
 int		copy_existing_args(char **old_args, char **new_args, int count);
 t_ast	*parse_redirection(t_token **tokens, t_shell *shell);
 t_ast	*handle_command_first(t_token **tokens, t_shell *shell);
+t_ast	*add_redir_to_chain(t_ast *redir, t_ast *redir_list, t_ast *cmd);
 
 /* parser/ast_builder.c */
 t_ast	*build_ast(t_token **tokens);
