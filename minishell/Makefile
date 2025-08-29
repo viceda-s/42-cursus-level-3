@@ -56,7 +56,6 @@ SRCFILES    = main.c \
               expander/expander_utils.c \
               expander/env_expansion.c \
               expander/exit_code.c \
-              expander/wildcard.c \
               executor/executor.c \
               executor/command_exec.c \
               executor/path_resolver.c \
