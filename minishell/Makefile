@@ -6,7 +6,7 @@
 #    By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/03 10:52:25 by viceda-s          #+#    #+#              #
-#    Updated: 2025/08/29 21:24:54 by bpiovano         ###   ########.fr        #
+#    Updated: 2025/08/29 21:41:22 by bpiovano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,7 @@ TOTAL_FILES = $(words $(SRCFILES))
 # Colors for output
 GREEN       = \033[0;32m
 RED         = \033[0;31m
-YELLOW      = \033[0;33m
+YELLOW      = \033[93m
 BLUE        = \033[0;34m
 NC          = \033[0m
 
@@ -101,7 +101,7 @@ NC          = \033[0m
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJDIR) $(OBJ)
-	@echo "$(YELLOW)Linking $(NAME)...$(NC)"
+	@echo "\033[95mLinking $(NAME)...\033[0m"
 	@$(CC) $(CFLAGS) $(OBJ) -L$(LIBFTDIR) -lft $(READLINE_LIB) $(READLINE) -o $(NAME)
 	@echo "╔═══════════════════════════════════════════════════════════════════════════════⋆.𐙚⋆"
 	@echo "║        ⣿⣿⣿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢉⠙⠻⠿⠛⢉⡉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿         ║"
@@ -156,7 +156,18 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS) | $(OBJDIR)
 	@mkdir -p $(dir $@)
 	@current=$$(echo "$(OBJ)" | tr ' ' '\n' | grep -n "$@" | cut -d: -f1); \
 	percentage=$$((current * 100 / $(TOTAL_FILES))); \
-	printf "$(BLUE)[%3d%%]$(NC) $(YELLOW)Compiling $(notdir $<)...$(NC)\n" "$$percentage"
+	if [ $$percentage -le 20 ]; then \
+		color="\033[91m"; \
+	elif [ $$percentage -le 40 ]; then \
+		color="\033[93m"; \
+	elif [ $$percentage -le 60 ]; then \
+		color="\033[93m"; \
+	elif [ $$percentage -le 80 ]; then \
+		color="\033[92m"; \
+	else \
+		color="\033[92m"; \
+	fi; \
+	printf "$(BLUE)[$$color%3d%%\033[0m$(BLUE)]$(NC) Compiling $(notdir $<)...\n" "$$percentage"
 	@$(CC) $(CFLAGS) $(READLINE_INCLUDE) -I$(INCDIR) -I$(LIBFTDIR)/include -c $< -o $@
 
 # Object directory creation
@@ -172,7 +183,7 @@ $(OBJDIR):
 
 # Libft compilation
 $(LIBFT):
-	@echo "$(YELLOW)Compiling libft...$(NC)"
+	@echo "\033[95mCompiling libft...\033[0m"
 	@make -C $(LIBFTDIR) --no-print-directory > /dev/null
 	@echo "$(GREEN)✓ libft compiled!$(NC)"
 
