@@ -82,15 +82,15 @@ int	set_env_var(char *name, char *value, t_shell *shell)
 		return (1);
 	new_var = create_env_string(name, value);
 	if (env_var_exists(name, shell->env))
+	{
+		free (new_var);
 		return (unset_env_var(name, shell) || set_env_var(name, value, shell));
+	}
 	count = count_env_vars(shell->env);
 	new_env = safe_malloc(sizeof(char *) * (count + 2));
-	i = 0;
-	while (i < count)
-	{
+	i = -1;
+	while (++i < count)
 		new_env[i] = shell->env[i];
-		i++;
-	}
 	new_env[i] = new_var;
 	new_env[i + 1] = NULL;
 	free(shell->env);

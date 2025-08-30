@@ -58,6 +58,7 @@ static void	shell_loop(t_shell *shell)
 		}
 		if (!input)
 		{
+			free (prompt);
 			ft_printf("exit\n");
 			break ;
 		}
