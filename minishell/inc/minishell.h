@@ -44,7 +44,7 @@
 /*                                 DEFINES                                    */
 /* ************************************************************************** */
 
-# define PROMPT "minishell$ "
+# define PROMPT "\033[36m\033[1mminishell$ \033[0m"
 # define MAX_PATH 4096
 # define MAX_CMD_LEN 4096
 
