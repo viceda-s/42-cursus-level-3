@@ -6,7 +6,7 @@
 #    By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/03 10:52:25 by viceda-s          #+#    #+#              #
-#    Updated: 2025/08/29 21:41:22 by bpiovano         ###   ########.fr        #
+#    Updated: 2025/09/01 18:15:10 by bpiovano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,13 +95,17 @@ GREEN       = \033[0;32m
 RED         = \033[0;31m
 YELLOW      = \033[93m
 BLUE        = \033[0;34m
+MAGENTA     = \033[95m
+BRIGHT_RED  = \033[91m
+BRIGHT_GREEN = \033[92m
+BRIGHT_YELLOW = \033[93m
 NC          = \033[0m
 
 # Main rules
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJDIR) $(OBJ)
-	@echo "\033[95mLinking $(NAME)...\033[0m"
+	@echo "$(MAGENTA)Linking $(NAME)...$(NC)"
 	@$(CC) $(CFLAGS) $(OBJ) -L$(LIBFTDIR) -lft $(READLINE_LIB) $(READLINE) -o $(NAME)
 	@echo "╔═══════════════════════════════════════════════════════════════════════════════⋆.𐙚⋆"
 	@echo "║        ⣿⣿⣿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢉⠙⠻⠿⠛⢉⡉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿         ║"
@@ -148,7 +152,7 @@ $(NAME): $(LIBFT) $(OBJDIR) $(OBJ)
 	@echo "╚══════════════════════════════════════════════════════════════════════════════════╝"
 	@echo ""
 	@echo "$(GREEN)✓ Kittyshell compiled successfully!$(NC)"
-	@echo "\033[32mRun ./minishell to start 🎉\033[0m"
+	@echo "$(GREEN)Run ./minishell to start 🎉$(NC)"
 	@echo ""
 
 # Object compilation with progress
@@ -157,17 +161,17 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS) | $(OBJDIR)
 	@current=$$(echo "$(OBJ)" | tr ' ' '\n' | grep -n "$@" | cut -d: -f1); \
 	percentage=$$((current * 100 / $(TOTAL_FILES))); \
 	if [ $$percentage -le 20 ]; then \
-		color="\033[91m"; \
+		color="$(BRIGHT_RED)"; \
 	elif [ $$percentage -le 40 ]; then \
-		color="\033[93m"; \
+		color="$(BRIGHT_YELLOW)"; \
 	elif [ $$percentage -le 60 ]; then \
-		color="\033[93m"; \
+		color="$(YELLOW)"; \
 	elif [ $$percentage -le 80 ]; then \
-		color="\033[92m"; \
+		color="$(BRIGHT_GREEN)"; \
 	else \
-		color="\033[92m"; \
+		color="$(GREEN)"; \
 	fi; \
-	printf "$(BLUE)[$$color%3d%%\033[0m$(BLUE)]$(NC) Compiling $(notdir $<)...\n" "$$percentage"
+	printf "$(BLUE)[$$color%3d%%$(NC)$(BLUE)]$(NC) Compiling $(notdir $<)...\n" "$$percentage"
 	@$(CC) $(CFLAGS) $(READLINE_INCLUDE) -I$(INCDIR) -I$(LIBFTDIR)/include -c $< -o $@
 
 # Object directory creation
@@ -183,7 +187,7 @@ $(OBJDIR):
 
 # Libft compilation
 $(LIBFT):
-	@echo "\033[95mCompiling libft...\033[0m"
+	@echo "$(MAGENTA)Compiling libft...$(NC)"
 	@make -C $(LIBFTDIR) --no-print-directory > /dev/null
 	@echo "$(GREEN)✓ libft compiled!$(NC)"
 
