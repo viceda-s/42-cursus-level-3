@@ -6,7 +6,7 @@
 /*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:18:38 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/09/02 14:32:54 by bpiovano         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:24:42 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@
 # define MAX_CMD_LEN 4096
 
 // Colores ANSI para el arcoíris
-#define C_RED     "\001\033[91m\002"
-#define C_ORANGE  "\001\033[38;5;208m\002"
-#define C_YELLOW  "\001\033[93m\002"
-#define C_GREEN   "\001\033[92m\002"
-#define C_BLUE    "\001\033[94m\002"
-#define C_INDIGO  "\001\033[38;5;54m\002"
-#define C_VIOLET  "\001\033[95m\002"
-#define C_RESET   "\001\033[0m\002"
+# define C_RED     "\001\033[91m\002"
+# define C_ORANGE  "\001\033[38;5;208m\002"
+# define C_YELLOW  "\001\033[93m\002"
+# define C_GREEN   "\001\033[92m\002"
+# define C_BLUE    "\001\033[94m\002"
+# define C_INDIGO  "\001\033[38;5;54m\002"
+# define C_VIOLET  "\001\033[95m\002"
+# define C_RESET   "\001\033[0m\002"
 
 /* Códigos de saída */
 # define EXIT_SUCCESS 0
