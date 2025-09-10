@@ -6,7 +6,7 @@
 #    By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/03 10:52:25 by viceda-s          #+#    #+#              #
-#    Updated: 2025/09/01 18:15:10 by bpiovano         ###   ########.fr        #
+#    Updated: 2025/09/10 16:49:54 by bpiovano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,15 +34,17 @@ HEADERS     = $(INCDIR)/minishell.h \
               $(INCDIR)/builtins.h
 
 # Source files
-SRCFILES    = main.c \
-              init.c \
-              prompt.c \
-              signals.c \
-              cleanup.c \
-              utils.c \
+SRCFILES    = shell/main.c \
+              shell/init.c \
+              shell/prompt.c \
+              shell/signals.c \
+              shell/cleanup.c \
+              utils/utils.c \
               lexer/lexer.c \
               lexer/tokenizer.c \
               lexer/tokenizer_utils.c \
+              lexer/escape_handler.c \
+              lexer/word_builder.c \
               lexer/token_utils.c \
               lexer/quote_handler.c \
               parser/parser.c \

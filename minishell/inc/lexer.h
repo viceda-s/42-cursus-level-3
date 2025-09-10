@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
+/*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:18:56 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/08/28 14:09:21 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:38:51 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,14 @@ t_token	*tokenize_input(char *input);
 
 /* lexer/tokenizer_utils.c */
 char	*join_and_free(char *s1, char *s2);
+int		is_word_delimiter(char c);
+
+/* lexer/escape_handler.c */
 char	*process_quoted_content(char *content, char quote_char);
 char	*extract_quoted_content(char *input, int *i, char quote_char);
 char	*handle_quote_in_word(char *input, int *i, char *result);
+
+/* lexer/word_builder.c */
 char	*extract_word(char *input, int *i);
 
 /* lexer/token_utils.c */
@@ -67,5 +72,6 @@ t_token	*create_token(t_token_type type, char *value);
 char	*handle_quotes(char *input, int *i);
 int		is_quote(char c);
 int		count_quotes(char *str, char quote);
+int		has_unclosed_quotes(char *input);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
+/*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 18:01:37 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/08/28 18:20:20 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:16:50 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,19 @@ static int	process_input(char *input, t_shell *shell)
 	return (exit_code);
 }
 
+static int	handle_signal_interrupt(t_shell *shell, char *input)
+{
+	if (g_signal_received == SIGINT)
+	{
+		shell->exit_code = 130;
+		g_signal_received = 0;
+		if (input)
+			free(input);
+		return (1);
+	}
+	return (0);
+}
+
 static void	shell_loop(t_shell *shell)
 {
 	char	*input;
@@ -51,11 +64,9 @@ static void	shell_loop(t_shell *shell)
 	{
 		prompt = get_prompt(shell);
 		input = readline(prompt);
-		if (g_signal_received == SIGINT)
-		{
-			shell->exit_code = 130;
-			g_signal_received = 0;
-		}
+		free(prompt);
+		if (handle_signal_interrupt(shell, input))
+			continue ;
 		if (!input)
 		{
 			ft_printf("exit\n");
@@ -65,7 +76,6 @@ static void	shell_loop(t_shell *shell)
 			add_history(input);
 		process_input(input, shell);
 		free(input);
-		free(prompt);
 	}
 }
 
@@ -91,6 +101,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!shell)
 		return (EXIT_FAILURE);
 	setup_signal_handlers();
+	setup_terminal();
 	cmd_result = handle_command_flag(argc, argv, shell);
 	if (cmd_result != -1)
 		return (cmd_result);

@@ -6,7 +6,7 @@
 /*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:18:38 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/09/02 17:24:42 by bpiovano         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:49:51 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@
 # define MAX_PATH 4096
 # define MAX_CMD_LEN 4096
 
-// Colores ANSI para el arcoíris
+// ANSI colors for rainbow prompt
 # define C_RED     "\001\033[91m\002"
 # define C_ORANGE  "\001\033[38;5;208m\002"
 # define C_YELLOW  "\001\033[93m\002"
@@ -57,14 +57,14 @@
 # define C_VIOLET  "\001\033[95m\002"
 # define C_RESET   "\001\033[0m\002"
 
-/* Códigos de saída */
+/* Exit codes */
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
 # define EXIT_MISUSE 2
 # define EXIT_CMD_NOT_FOUND 127
 # define EXIT_CMD_NOT_EXECUTABLE 126
 
-/* Estados dos processos */
+/* Process states */
 # define PROCESS_RUNNING 1
 # define PROCESS_STOPPED 2
 # define PROCESS_DONE 3
@@ -80,54 +80,54 @@
 /*                                STRUCTURES                                  */
 /* ************************************************************************** */
 
-/* Variável global para sinais (única permitida) */
+/* Global variable for signals (only one allowed) */
 extern int	g_signal_received;
 
-/* Estrutura para contexto de expansão */
+/* Structure for expansion context */
 typedef struct s_expand_ctx
 {
 	int		in_single;
 	int		in_double;
 }	t_expand_ctx;
 
-/* Estrutura principal da shell */
+/* Main shell structure */
 typedef struct s_shell
 {
-	char			**env;			/* Variáveis de ambiente */
-	int				exit_code;		/* Código de saída do último comando */
-	int				interactive;	/* Modo interativo */
-	struct s_token	*tokens;		/* Lista de tokens */
-	struct s_ast	*ast;			/* Árvore sintática */
+	char			**env;			/* Environment variables */
+	int				exit_code;		/* Exit code of last command */
+	int				interactive;	/* Interactive mode */
+	struct s_token	*tokens;		/* Token list */
+	struct s_ast	*ast;			/* Syntax tree */
 }	t_shell;
 
 /* ************************************************************************** */
-/*                             FUNÇÃO PROTOTYPES                             */
+/*                             FUNCTION PROTOTYPES                            */
 /* ************************************************************************** */
 
-/* main.c */
+/* shell/main.c */
 int		main(int argc, char **argv, char **envp);
 
-/* init.c */
+/* shell/init.c */
 t_shell	*init_shell(char **envp);
 int		setup_signals(void);
 void	setup_terminal(void);
 
-/* prompt.c */
+/* shell/prompt.c */
 char	*get_prompt(t_shell *shell);
 char	*read_input(t_shell *shell);
 
-/* signals.c */
+/* shell/signals.c */
 void	signal_handler(int sig);
 void	setup_signal_handlers(void);
 void	reset_signal_handlers(void);
 
-/* cleanup.c */
+/* shell/cleanup.c */
 void	cleanup_shell(t_shell *shell);
 void	free_tokens(struct s_token *tokens);
 void	free_ast(struct s_ast *ast);
 void	cleanup_and_exit(t_shell *shell, int exit_code);
 
-/* utils.c */
+/* utils/utils.c */
 void	error_msg(char *cmd, char *arg, char *msg);
 void	perror_msg(char *cmd);
 int		syntax_error(char *token);
@@ -137,6 +137,16 @@ void	safe_free(void **ptr);
 int		is_whitespace(char c);
 char	*trim_whitespace(char *str);
 int		count_args(char **args);
+
+/* utils/error_handler.c */
+void	print_error(char *str);
+void	print_error_nl(char *str);
+int		handle_error(char *context, char *message, int exit_code);
+
+/* utils/debug.c */
+void	debug_print_tokens(struct s_token *tokens);
+void	debug_print_env(char **env);
+void	debug_shell_state(t_shell *shell);
 
 /* expander/expander.c */
 char	*expand_variables(char *str, t_shell *shell);
@@ -151,5 +161,13 @@ char	*handle_variable_expansion(char *str, int *i, t_shell *shell,
 /* expander/expander_helpers.c */
 char	*process_char(char *str, int *i, t_shell *shell, t_expand_ctx *ctx);
 int		can_expand_tilde(char *str, int i, t_expand_ctx *ctx);
+
+/* expander/env_expansion.c */
+void	expand_token_value(struct s_token *token, t_shell *shell);
+void	expand_all_tokens(struct s_token *tokens, t_shell *shell);
+
+/* expander/exit_code.c */
+void	update_exit_code(t_shell *shell, int code);
+int		get_exit_code(t_shell *shell);
 
 #endif

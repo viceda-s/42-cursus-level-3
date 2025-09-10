@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+         #
+#    By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/10 14:02:31 by viceda-s          #+#    #+#              #
-#    Updated: 2025/08/26 16:17:14 by viceda-s         ###   ########.fr        #
+#    Updated: 2025/09/10 14:46:54 by bpiovano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -148,14 +148,14 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)/$(GNL_DIR)
 
 $(NAME): $(OBJS_DIR) $(OBJS)
-	@echo -e "$(GREEN)[OK] Building $(NAME)...$(RESET)"
+	@printf "$(GREEN)[OK] Building $(NAME)...$(RESET)\n"
 	@$(AR) $(NAME) $(OBJS)
-	@echo -e "$(GREEN)[OK] Library compiled successfully!$(RESET)"
+	@printf "$(GREEN)[OK] Library compiled successfully!$(RESET)\n"
 
 bonus: $(OBJS_DIR) $(OBJS) $(BONUS_OBJS)
-	@echo -e "$(GREEN)[OK] Building $(NAME) with bonus...$(RESET)"
+	@printf "$(GREEN)[OK] Building $(NAME) with bonus...$(RESET)\n"
 	@$(AR) $(NAME) $(OBJS) $(BONUS_OBJS)
-	@echo -e "$(GREEN)[OK] Bonus $(NAME) compiled successfully!$(RESET)"
+	@printf "$(GREEN)[OK] Bonus $(NAME) compiled successfully!$(RESET)\n"
 
 $(OBJS_DIR)/%.o: %.c
 	@current=$$(find $(OBJS_DIR) -name "*.o" 2>/dev/null | wc -l | tr -d ' '); \
@@ -165,14 +165,14 @@ $(OBJS_DIR)/%.o: %.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	@echo -e "$(RED)Cleaning object files...$(RESET)"
+	@printf "$(RED)Cleaning object files...$(RESET)\n"
 	@$(RM) -r $(OBJS_DIR)
-	@echo -e "$(GREEN)[OK] Object files removed!$(RESET)"
+	@printf "$(GREEN)[OK] Object files removed!$(RESET)\n"
 
 fclean: clean
-	@echo -e "$(RED)Cleaning library...$(RESET)"
+	@printf "$(RED)Cleaning library...$(RESET)\n"
 	@$(RM) $(NAME)
-	@echo -e "$(GREEN)[OK] Full clean completed!$(RESET)"
+	@printf "$(GREEN)[OK] Full clean completed!$(RESET)\n"
 
 re: fclean all
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arg_expansion.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
+/*   By: bpiovano <	bpiovano@student.42luxembour    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 14:36:00 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/08/28 14:48:41 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/09/03 20:02:34 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

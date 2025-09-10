@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
+/*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:27:31 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/08/28 10:27:33 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/09/10 16:40:23 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,43 @@ static char	*get_target_dir(char **args, t_shell *shell)
 		}
 		return (target);
 	}
+	if (ft_strncmp(args[1], "-", 2) == 0 && ft_strlen(args[1]) == 1)
+	{
+		target = get_env_var("OLDPWD", shell->env);
+		if (!target)
+		{
+			error_msg("cd", NULL, "OLDPWD not set");
+			return (NULL);
+		}
+		return (target);
+	}
 	return (args[1]);
 }
 
-int	builtin_cd(char **args, t_shell *shell)
+static int	check_cd_args(char **args)
+{
+	if (args[1] && args[2])
+	{
+		ft_putstr_fd("minishell: cd:", STDERR_FILENO);
+		ft_putstr_fd("too many arguments\n", STDERR_FILENO);
+		ft_putstr_fd("cd: hint: use quotes for ", STDERR_FILENO);
+		ft_putstr_fd("directories with spaces\n", STDERR_FILENO);
+		return (1);
+	}
+	return (0);
+}
 
+int	builtin_cd(char **args, t_shell *shell)
 {
 	char	*target;
 	char	*old_pwd;
+	int		is_dash;
 
-	if (args[1] && args[2])
-	{
-		ft_putstr_fd("minishell: cd: too many arguments\n", STDERR_FILENO);
+	if (check_cd_args(args))
 		return (1);
-	}
 	old_pwd = getcwd(NULL, 0);
+	is_dash = (args[1] && ft_strncmp(args[1], "-", 2) == 0
+			&& ft_strlen(args[1]) == 1);
 	target = get_target_dir(args, shell);
 	if (!target)
 	{
@@ -67,7 +89,8 @@ int	builtin_cd(char **args, t_shell *shell)
 		free(old_pwd);
 		return (1);
 	}
+	if (is_dash)
+		ft_printf("%s\n", target);
 	update_pwd_vars(shell, old_pwd);
-	free(old_pwd);
-	return (0);
+	return (free(old_pwd), 0);
 }
