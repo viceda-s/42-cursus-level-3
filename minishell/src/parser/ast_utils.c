@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
+/*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:06:11 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/08/28 10:19:30 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/09/10 18:16:57 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

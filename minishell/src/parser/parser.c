@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
+/*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:06:28 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/08/28 10:19:31 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/09/10 18:16:23 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ t_ast	*parser(t_token *tokens, t_shell *shell)
 		return (NULL);
 	current = tokens;
 	ast = parse_expression(&current, shell);
+	if (ast && !validate_pipe_limit(ast))
+	{
+		free_ast(ast);
+		return (NULL);
+	}
 	return (ast);
 }
 

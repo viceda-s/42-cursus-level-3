@@ -6,7 +6,7 @@
 /*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:18:48 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/08/29 17:18:21 by bpiovano         ###   ########.fr       */
+/*   Updated: 2025/09/10 18:17:01 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,9 @@ char	*check_redirect_syntax(t_token *current);
 /* parser/ast_utils.c */
 void	free_ast(t_ast *ast);
 void	print_ast(t_ast *ast, int depth);
+
+/* parser/pipe_validator.c */
+int		count_pipes_in_ast(t_ast *ast);
+int		validate_pipe_limit(t_ast *ast);
 
 #endif

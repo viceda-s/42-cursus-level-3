@@ -6,7 +6,7 @@
 /*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 18:01:37 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/09/10 16:16:50 by bpiovano         ###   ########.fr       */
+/*   Updated: 2025/09/10 18:13:10 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	process_input(char *input, t_shell *shell)
 	ast = parser(tokens, shell);
 	free_tokens(tokens);
 	if (!ast)
-		return (0);
+		return (1);
 	exit_code = execute_ast(ast, shell);
 	free_ast(ast);
 	shell->exit_code = exit_code;

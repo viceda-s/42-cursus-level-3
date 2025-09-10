@@ -6,7 +6,7 @@
 #    By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/03 10:52:25 by viceda-s          #+#    #+#              #
-#    Updated: 2025/09/10 16:49:54 by bpiovano         ###   ########.fr        #
+#    Updated: 2025/09/10 18:16:58 by bpiovano         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRCFILES    = shell/main.c \
               parser/syntax_checker.c \
               parser/syntax_utils.c \
               parser/ast_utils.c \
+              parser/pipe_validator.c \
               expander/expander.c \
               expander/expander_utils.c \
               expander/env_expansion.c \

@@ -6,7 +6,7 @@
 /*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 10:18:38 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/09/10 16:49:51 by bpiovano         ###   ########.fr       */
+/*   Updated: 2025/09/10 18:13:04 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 
 # define MAX_PATH 4096
 # define MAX_CMD_LEN 4096
+# define MAX_PIPES 100
 
 // ANSI colors for rainbow prompt
 # define C_RED     "\001\033[91m\002"
