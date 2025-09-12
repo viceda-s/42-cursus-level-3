@@ -6,13 +6,13 @@
 /*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 18:01:37 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/09/10 18:13:10 by bpiovano         ###   ########.fr       */
+/*   Updated: 2025/09/12 14:47:18 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_signal_received = 0;
+int			g_signal_received = 0;
 
 static int	process_input(char *input, t_shell *shell)
 {
@@ -65,6 +65,14 @@ static void	shell_loop(t_shell *shell)
 		prompt = get_prompt(shell);
 		input = readline(prompt);
 		free(prompt);
+		if (g_signal_received == SIGINT)
+		{
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+			shell->exit_code = 130;
+			g_signal_received = 0;
+		}
 		if (handle_signal_interrupt(shell, input))
 			continue ;
 		if (!input)

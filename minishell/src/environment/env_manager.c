@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_manager.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
+/*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:14:51 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/08/28 11:23:38 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/09/12 14:38:28 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ int	set_env_var(char *name, char *value, t_shell *shell)
 
 	if (!name || !value || !shell)
 		return (1);
-	new_var = create_env_string(name, value);
 	if (env_var_exists(name, shell->env))
 		return (unset_env_var(name, shell) || set_env_var(name, value, shell));
 	count = count_env_vars(shell->env);
+	new_var = create_env_string(name, value);
 	new_env = safe_malloc(sizeof(char *) * (count + 2));
 	i = 0;
 	while (i < count)

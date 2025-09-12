@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viceda-s <viceda-s@student.42luxembourg    +#+  +:+       +#+        */
+/*   By: bpiovano <bpiovano@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:14:57 by viceda-s          #+#    #+#             */
-/*   Updated: 2025/08/28 11:23:38 by viceda-s         ###   ########.fr       */
+/*   Updated: 2025/09/12 14:36:09 by bpiovano         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
