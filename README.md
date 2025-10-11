@@ -1,4 +1,4 @@
-# Milestone 3 – In Progress ⏳
+# Milestone 3 – Completed 🟢
 
 Welcome to my repository documenting **Milestone 3** at 42 School. This repository tracks my ongoing progress on both core projects—**Philosophers** and **Minishell**—including technical highlights, structures, and implementation insights.
 
@@ -7,7 +7,7 @@ Welcome to my repository documenting **Milestone 3** at 42 School. This reposito
 | Project | Status | Focus \& Technical Highlights |
 | :-- | :--: | :-- |
 | Philosophers | ✅ 100/100 | Concurrent programming, thread/mutex synchronization |
-| Minishell | ⏳ In Progress | Shell parsing, process management, Unix signals |
+| Minishell | ✅ 100/100 | Shell parsing, process management, Unix signals |
 
 ## 🔎 Project Details
 
@@ -23,16 +23,18 @@ Implement and simulate the classic Dining Philosophers problem to explore concur
 - **Skills gained:** Concurrency, multithreading, resource locking, timing coordination, edge-case testing.
 
 
-### 🐚 Minishell - ⏳ In Progress
+### 🐚 Minishell – 100/100 ✅
 
-- **Objective:**
-Recreate a simple Unix shell capable of interpreting and executing user commands.
-- **Key Features (planned):**
-    - Custom parser for handling complex command lines, quoting, and variable expansion.
-    - Process forking and execution with robust error management.
-    - Implementation of pipelines (`|`), redirections (`>`, `<`), and built-in commands.
-    - Signal handling (SIGINT/SIGQUIT) for user interaction fidelity.
-- **Anticipated Skills:** Parsing, process and memory management, file descriptor manipulation, shell scripting standards.
+- **Objective:** Develop a simple Unix shell replicating essential Bash functionalities.
+- **Key Features:**  
+    - Custom command parser with quoting and variable expansion.  
+    - Execution of commands via PATH or absolute/relative paths.  
+    - Support for pipes (`|`), redirections (`>`, `<`, `>>`, `<<`).  
+    - Built-in commands: `echo`, `cd`, `pwd`, `export`, `unset`, `env`, `exit`.  
+    - Signal handling for `Ctrl+C`, `Ctrl+D`, and `Ctrl+\`.  
+    - Command history using the `readline` library.
+- **Skills gained:** Process and memory management, I/O redirection, inter-process communication, signal handling, and advanced C programming.
+
 
 
 ## 📂 Repository Structure
@@ -45,17 +47,6 @@ Projects are split into dedicated subdirectories, each with their code and relev
 ├── philosophers/
 └── minishell/
 ```
-
-
-## 🚦 Progress Tracker
-
-| Milestone Item | Status |
-| :-- | :--: |
-| Repository structure | ✅ Complete |
-| Philosophers code | ✅ Complete |
-| Philosophers evaluation | ✅ Complete |
-| Minishell code | ⏳ WIP |
-| Minishell evaluation | ⏳ WIP |
 
 ## 🏆 Personal Highlights
 
@@ -73,7 +64,5 @@ git clone https://github.com/viceda-s/42-cursus-level-3.git
 ```
 
 2. Visit each project folder for implementation and evolving documentation (build/run instructions included).
-
-_This README will be updated regularly with progress, implementation notes, and final results._
 
 **For feedback, issues, or collaboration, open an issue or contact me directly!**
