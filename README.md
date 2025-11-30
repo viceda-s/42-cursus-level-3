@@ -23,7 +23,7 @@ Implement and simulate the classic Dining Philosophers problem to explore concur
 - **Skills gained:** Concurrency, multithreading, resource locking, timing coordination, edge-case testing.
 
 
-### 🐚 Minishell – 100/100 ✅
+### 🐚 Minishell (with @bpiovano)– 100/100 ✅
 
 - **Objective:** Develop a simple Unix shell replicating essential Bash functionalities.
 - **Key Features:**  
