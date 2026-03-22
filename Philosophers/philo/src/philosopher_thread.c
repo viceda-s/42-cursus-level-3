@@ -30,7 +30,7 @@ void	*philosopher_routine(void *arg)
 	philo = (t_philo *)arg;
 	if (philo->data->nb_philo == 1)
 	{
-		print_action(philo, "has taken a fork");
+		print_action(philo, MSG_FORK);
 		ft_usleep(philo->data->time_to_die);
 		return (NULL);
 	}

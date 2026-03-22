@@ -27,6 +27,18 @@
 # define COLOR_THINK	"\033[35m"
 # define COLOR_DIED		"\033[31m"
 
+# define EMOJI_FORK		"🍴"
+# define EMOJI_EAT		"🍝"
+# define EMOJI_SLEEP	"😴"
+# define EMOJI_THINK	"🧠"
+# define EMOJI_DIED		"💀"
+
+# define MSG_FORK		"has taken a fork 🍴"
+# define MSG_EAT		"is eating 🍝"
+# define MSG_SLEEP		"is sleeping 😴"
+# define MSG_THINK		"is thinking 🧠"
+# define MSG_DIED		"died 💀"
+
 typedef struct s_data
 {
 	int				nb_philo;

@@ -34,24 +34,23 @@ void	print_action(t_philo *philo, char *action)
 	long	timestamp;
 	char	*color;
 
-	if (strncmp(action, "has taken a fork", 16) == 0)
+	color = COLOR_RESET;
+	if (!strcmp(action, MSG_FORK))
 		color = COLOR_FORK;
-	else if (strncmp(action, "is eating", 9) == 0)
+	else if (!strcmp(action, MSG_EAT))
 		color = COLOR_EAT;
-	else if (strncmp(action, "is sleeping", 11) == 0)
+	else if (!strcmp(action, MSG_SLEEP))
 		color = COLOR_SLEEP;
-	else if (strncmp(action, "is thinking", 11) == 0)
+	else if (!strcmp(action, MSG_THINK))
 		color = COLOR_THINK;
-	else if (strncmp(action, "died", 4) == 0)
+	else if (!strcmp(action, MSG_DIED))
 		color = COLOR_DIED;
-	else
-		color = COLOR_RESET;
 	pthread_mutex_lock(&philo->data->write_mutex);
 	if (!philo->data->simulation_end)
 	{
 		timestamp = get_timestamp() - philo->data->start_time;
-		printf("%s%ld %d %s%s\n", color, timestamp, philo->id, action,
-			COLOR_RESET);
+		printf("%s%ld ms | Philosopher %d %s%s\n", color, timestamp,
+			philo->id, action, COLOR_RESET);
 	}
 	pthread_mutex_unlock(&philo->data->write_mutex);
 }

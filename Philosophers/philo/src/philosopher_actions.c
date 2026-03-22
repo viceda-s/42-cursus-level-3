@@ -34,9 +34,9 @@ void	take_forks(t_philo *philo)
 
 	get_fork_order(philo, &first_fork, &second_fork);
 	pthread_mutex_lock(first_fork);
-	print_action(philo, "has taken a fork");
+	print_action(philo, MSG_FORK);
 	pthread_mutex_lock(second_fork);
-	print_action(philo, "has taken a fork");
+	print_action(philo, MSG_FORK);
 }
 
 void	drop_forks(t_philo *philo)
@@ -51,7 +51,7 @@ void	drop_forks(t_philo *philo)
 
 void	eat(t_philo *philo)
 {
-	print_action(philo, "is eating");
+	print_action(philo, MSG_EAT);
 	pthread_mutex_lock(&philo->data->meal_mutex);
 	philo->last_meal_time = get_timestamp();
 	philo->meals_eaten++;
@@ -61,9 +61,9 @@ void	eat(t_philo *philo)
 
 void	sleep_and_think(t_philo *philo)
 {
-	print_action(philo, "is sleeping");
+	print_action(philo, MSG_SLEEP);
 	ft_usleep(philo->data->time_to_sleep);
-	print_action(philo, "is thinking");
+	print_action(philo, MSG_THINK);
 	if (philo->data->nb_philo % 2 == 1)
 		ft_usleep(1);
 }
